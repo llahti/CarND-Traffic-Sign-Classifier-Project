@@ -15,8 +15,8 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
+[image1]: ./illustrations/classid_histogram.png "Class ID Histogram"
+[image2]: ./illustrations/sample_images.png "Sample of images in training set."
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
@@ -25,45 +25,58 @@ The goals / steps of this project are the following:
 [image8]: ./examples/placeholder.png "Traffic Sign 5"
 
 # Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
----
+Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+
 ## 1. Submissing files
 
-Submission contains all the files required by rubic and needed to reproduce results.
+Submission contains all the files required by rubic.
 1. writeup_template.md (This file)
 2. Traffic_Sign_Classifier.ipyn
 3. Report.html (generated from Traffic_Sign_Classifier.ipyn)
 4. Visualizations in ./illustrations folder
-5. Test images in ./test_images folder
+5. Test images in ./test_images folder/
 6. sign_names.csv
 7. LareNet-6 saved model
 
 ### Writeup / README
 
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
+#### 1. Provide a Writeup / README 
+That includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
 You're reading it! and here is a link to my [project code](https://github.com/llahti/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+
+### Loading data
+
+Data was stored in a python pickle file and it contained training, validation and test set.
+
 
 ### Data Set Summary & Exploration
 
 #### 1. The submission includes a basic summary of the data set.
 
-The code for this step is contained in the second code cell of the IPython notebook.  
+The code for this step is contained in the [second code cell of the IPython notebook].  (https://render.githubusercontent.com/view/ipynb?commit=8fe96500cc4d031eeb8886cd79266391ea07e6fe&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c6c616874692f4361724e442d547261666669632d5369676e2d436c61737369666965722d50726f6a6563742f386665393635303063633464303331656562383838366364373932363633393165613037653666652f547261666669635f5369676e5f436c61737369666965722e6970796e62&nwo=llahti%2FCarND-Traffic-Sign-Classifier-Project&path=Traffic_Sign_Classifier.ipynb&repository_id=84849543#Provide-a-Basic-Summary-of-the-Data-Set-Using-Python,-Numpy-and/or-Pandas)
 
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
 
-* The size of training set is ?
-* The size of test set is ?
-* The shape of a traffic sign image is ?
-* The number of unique classes/labels in the data set is ?
+* Number of training examples = 34799
+* Number of testing examples = 12630
+* Image data shape = (32, 32, 3)
+* Number of classes = 43
 
-####2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
-The code for this step is contained in the third code cell of the IPython notebook.  
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+#### 2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
+
+The code for showing few sample images is in [third code cell of the IPython notebook].  (https://render.githubusercontent.com/view/ipynb?commit=8fe96500cc4d031eeb8886cd79266391ea07e6fe&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c6c616874692f4361724e442d547261666669632d5369676e2d436c61737369666965722d50726f6a6563742f386665393635303063633464303331656562383838366364373932363633393165613037653666652f547261666669635f5369676e5f436c61737369666965722e6970796e62&nwo=llahti%2FCarND-Traffic-Sign-Classifier-Project&path=Traffic_Sign_Classifier.ipynb&repository_id=84849543#Include-an-exploratory-visualization-of-the-dataset)
+
+Here is the sample of images in training set
+
+![alt text][image2]
+
+
+Here is an exploratory visualization of the data set. It is a histogram showing quantity of traffic sgns in each category.
 
 ![alt text][image1]
 
@@ -77,7 +90,7 @@ As a first step, I decided to convert the images to grayscale because ...
 
 Here is an example of a traffic sign image before and after grayscaling.
 
-![alt text][image2]
+
 
 As a last step, I normalized the image data because ...
 
