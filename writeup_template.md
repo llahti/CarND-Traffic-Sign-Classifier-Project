@@ -15,9 +15,12 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./illustrations/classid_histogram.png "Class ID Histogram"
+[image1]: ./illustrations/classid_histogram.png "Class ID Histogram."
 [image2]: ./illustrations/sample_images.png "Sample of images in training set."
-[image3]: ./examples/random_noise.jpg "Random Noise"
+[image3]: ./illustrations/sample_images_processed.png "Sample of preprocessed images."
+[image4]: ./illustrations/data_rotation.png "Data augmentation by rotating image."
+[image5]: ./illustrations/data_augmentation_shift.png "Data augmentation by shifting image."
+
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
 [image6]: ./examples/placeholder.png "Traffic Sign 3"
@@ -101,25 +104,32 @@ In my code there are following steps in pre-processing pipeline
 3. Limit range to -1...1
    - by adjusting range of values around 0 it is possible to have zero mean
    - It prevents data values going too large which would cause problems when neural net is trained
-   
-   
+
+Below are shown preprocessed images, traffic signs are same than image above in data Exploration step.
+![alt text][image3]
+
 
 
 #### 2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
-The code for splitting the data into training and validation sets is contained in the fifth code cell of the IPython notebook.  
+Data is splitted into training, validation and test sets in first code cell when data is loaded from pickle file. It could be also reasonable to combine all datasets and then randomly split those to new training and validation and test sets. Potential reason for that is that i don't have information that have that data already been randomly splitted or not.
 
-To cross validate my model, I randomly split the training data into a training set and validation set. I did this by ...
+It would be also interesting to try out K-fold crossvalidation as it could be done within one day with my current workstation. Need to remember that number of K can't be very high. perhaps K=5 could be still doable within reasonable time to test model's performance sometimes.
 
-My final training set had X number of images. My validation set and test set had Y and Z number of images.
+Final number of images in sets after data augmentation is:
+- Training set 1565955
+- Validation set 4410
+- Testing set 12630
 
-The sixth code cell of the IPython notebook contains the code for augmenting the data set. I decided to generate additional data because ... To add more data to the the data set, I used the following techniques because ... 
 
-Here is an example of an original image and an augmented image:
+I decide to augment data by rotating and shifting. Other techiques such as tilting, stretching, adjusting brightness and adjusting contrast i left out from my project. Data augmentation is good way to get more training data cheaply also it helps to train model better, makes it more robust and prevent overfitting.
 
-![alt text][image3]
+Example of image rotation
+![alt text][imag4]
 
-The difference between the original data set and the augmented data set is the following ... 
+Example of image shifting
+![alt text][image5]
+
 
 
 #### 3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
