@@ -84,15 +84,26 @@ Here is an exploratory visualization of the data set. It is a histogram showing 
 
 #### 1. Describe how, and identify where in your code, you preprocessed the image data. What tecniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
 
-The code for this step is contained in the fourth code cell of the IPython notebook.
+Data should be optimized before it is fed to the neural network in order to:
 
-As a first step, I decided to convert the images to grayscale because ...
+- make it easier to train
+- prevent overfitting
+- and generally make it more suitable for model
 
-Here is an example of a traffic sign image before and after grayscaling.
+In my code there are following steps in pre-processing pipeline
 
+1. convert RGB to grayscale
+   - From grayscale image we are able to extract most of the features
+   - Reduce amount of data needed by 3 times
+   - It is easier to work with grayscale images
+2. Adjust mean to zero
+   - Zero mean of data helps neural net to train faster and better
+3. Limit range to -1...1
+   - by adjusting range of values around 0 it is possible to have zero mean
+   - It prevents data values going too large which would cause problems when neural net is trained
+   
+   
 
-
-As a last step, I normalized the image data because ...
 
 #### 2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
