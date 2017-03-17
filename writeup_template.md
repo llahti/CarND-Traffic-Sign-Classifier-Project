@@ -55,7 +55,7 @@ Data was stored in a python pickle file and it contained training, validation an
 
 #### 1. The submission includes a basic summary of the data set.
 
-The code for this step is contained in the [second code cell of the IPython notebook].  (https://render.githubusercontent.com/view/ipynb?commit=8fe96500cc4d031eeb8886cd79266391ea07e6fe&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c6c616874692f4361724e442d547261666669632d5369676e2d436c61737369666965722d50726f6a6563742f386665393635303063633464303331656562383838366364373932363633393165613037653666652f547261666669635f5369676e5f436c61737369666965722e6970796e62&nwo=llahti%2FCarND-Traffic-Sign-Classifier-Project&path=Traffic_Sign_Classifier.ipynb&repository_id=84849543#Provide-a-Basic-Summary-of-the-Data-Set-Using-Python,-Numpy-and/or-Pandas)
+The code for this step is contained in the [second code cell of the IPython notebook](https://render.githubusercontent.com/view/ipynb?commit=8fe96500cc4d031eeb8886cd79266391ea07e6fe&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c6c616874692f4361724e442d547261666669632d5369676e2d436c61737369666965722d50726f6a6563742f386665393635303063633464303331656562383838366364373932363633393165613037653666652f547261666669635f5369676e5f436c61737369666965722e6970796e62&nwo=llahti%2FCarND-Traffic-Sign-Classifier-Project&path=Traffic_Sign_Classifier.ipynb&repository_id=84849543#Provide-a-Basic-Summary-of-the-Data-Set-Using-Python,-Numpy-and/or-Pandas).
 
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
@@ -69,7 +69,7 @@ signs data set:
 
 #### 2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
-The code for showing few sample images is in [third code cell of the IPython notebook].  (https://render.githubusercontent.com/view/ipynb?commit=8fe96500cc4d031eeb8886cd79266391ea07e6fe&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c6c616874692f4361724e442d547261666669632d5369676e2d436c61737369666965722d50726f6a6563742f386665393635303063633464303331656562383838366364373932363633393165613037653666652f547261666669635f5369676e5f436c61737369666965722e6970796e62&nwo=llahti%2FCarND-Traffic-Sign-Classifier-Project&path=Traffic_Sign_Classifier.ipynb&repository_id=84849543#Include-an-exploratory-visualization-of-the-dataset)
+The code for showing few sample images is in [third code cell of the IPython notebook](https://render.githubusercontent.com/view/ipynb?commit=8fe96500cc4d031eeb8886cd79266391ea07e6fe&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c6c616874692f4361724e442d547261666669632d5369676e2d436c61737369666965722d50726f6a6563742f386665393635303063633464303331656562383838366364373932363633393165613037653666652f547261666669635f5369676e5f436c61737369666965722e6970796e62&nwo=llahti%2FCarND-Traffic-Sign-Classifier-Project&path=Traffic_Sign_Classifier.ipynb&repository_id=84849543#Include-an-exploratory-visualization-of-the-dataset).
 
 Here is the sample of images in training set
 
