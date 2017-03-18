@@ -20,10 +20,17 @@ The goals / steps of this project are the following:
 [image3]: ./illustrations/sample_images_processed.png "Sample of preprocessed images."
 [image4]: ./illustrations/data_rotation.png "Data augmentation by rotating image."
 [image5]: ./illustrations/data_augmentation_shift.png "Data augmentation by shifting image."
+[image6]: ./illustrations/model.png "NeuralNet model"
+[image7]: ./illustrations/5_samples_from_web.png "5 German traffic signs from web"
+[image8]: ./illustrations/5_samples_from_web_preprocessed.png "Preprocessed german traffic signs"
+[image9]: ./illustrations/softmax_propabilities.png "Softmax propabilites for 5 german traffic signs"
 
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
+[image10]: ./illustrations/vis_L1_conv1.png "Layer 1 convolution"
+[image11]: ./illustrations/vis_L1_activation.png "Layer 1 activation"
+[image12]: ./illustrations/vis_L1_pooling.png "Layer 1 pooling"
+[image13]: ./illustrations/vis_L2_conv.png "Layer 2 convolution"
+[image14]: ./illustrations/vis_L2_activation.png "Layer 2 activation"
+
 [image7]: ./examples/placeholder.png "Traffic Sign 4"
 [image8]: ./examples/placeholder.png "Traffic Sign 5"
 
@@ -105,7 +112,7 @@ In my code there are following steps in pre-processing pipeline
    - by adjusting range of values around 0 it is possible to have zero mean
    - It prevents data values going too large which would cause problems when neural net is trained
 
-Below are shown preprocessed images, traffic signs are same than image above in data Exploration step.
+Preprocessed images are shown below. Traffic signs are same than image above in data Exploration step.
 ![alt text][image3]
 
 
@@ -125,7 +132,7 @@ Final number of images in sets after data augmentation is:
 I decide to augment data by rotating and shifting. Other techiques such as tilting, stretching, adjusting brightness and adjusting contrast i left out from my project. Data augmentation is good way to get more training data cheaply also it helps to train model better, makes it more robust and prevent overfitting.
 
 Example of image rotation
-![alt text][imag4]
+![alt text][image4]
 
 Example of image shifting
 ![alt text][image5]
@@ -134,21 +141,9 @@ Example of image shifting
 
 #### 3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-The code for my final model is located in the seventh cell of the ipython notebook. 
+My final model is constructed as shown in image and it can be found from the IPython notebook's code cell.
 
-My final model consisted of the following layers:
-
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
+![alt text][image6]
  
 
 
@@ -156,40 +151,61 @@ My final model consisted of the following layers:
 
 The code for training the model is located in the eigth cell of the ipython notebook. 
 
-To train the model, I used an ....
+Final model was trained by using: 
+- augmented training set, 
+- number of epochs were 100 and 
+- batch size 2048. 
+
+I had to limit batch size 512 to on 3-channel images and 4096 on 1-channel images due to my new GPU was crashing if batch size was bigger. I believe that was due to problems related to GPU utilization rate as there were plenty of memory available, but when GPU utilization get above 80% it began to crash intermittenly.
+
+I used the standard Adam-Optimizer which was used also in LeNet exercise. There are few papers which recommended Stochastic Gradient Descent (SGD) - optimizer over Adam-optimizer, because SGD was able to achieve higher accuracy. Generally Adam-optimizer is faster than SGD so i selected it because in my case time is money and i needed results fast.
+
 
 #### 5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
-The code for calculating the accuracy of the model is located in the ninth cell of the Ipython notebook.
+The function for calculating accuracy is the original one from LeNet-exercice and it is used in 2 key places. One place to use it is in training loop to evaluate training and validation accuracy. Note that i don't evaluate test date set in training loop because test set should be used sparingly.
+
+The other key place is the final evaluation of model where also test set is evaluated.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* Training Accuracy = 0.997
+* Validation Accuracy = 0.972
+* Test Accuracy = 0.955
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to over fitting or under fitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+Bit history of my model...
+
+I started model development from the model introduced in LeNet exercise. In beginning i didn't do any preprocessing for data so images were fed to model as is. With this approach i had problems that sometimes it took many epochs that model started converging to high accuracy. Also the final accuracy was not enough.
+
+Then next step was to make model deeper and wider. I added more convolutional layers for better feature extraction. I did several experiments and finally i was able to achieve about 98% validation accuracy. Accuracy on test set were somewhere around 96%.
+
+Then i implemented dropout on fully connected layers to preven over fitting.
+
+After this i begin to experiment with data preprocessing where i implemented image grayscaling and normalization where image mean is adjusted to zero and range is limited to -1...1. This image preprocessing was one of the key steps to make model training faster. 
+
+If i would change something i would do data preprocessing as a first step as it is one of the most important things to make model successful. Then bit more thought need to be put to neural net structure. Perhaps multi-stage structure would be reasonable. One other possibility is to use already made models such as Inception-V3 or similar.
+
 
 ### Test a Model on New Images
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+I tested my model with 5 german traffic signs downloaded from web. Here is picture of those
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][image7]
 
-The first image might be difficult to classify because ...
+And same traffic signs after preprocessing
+
+![alt text][image7]
+
+Few comments about these german traffic signs Comments are per image index
+
+1. For human it seems to be obvious that it is 80km/h speed limit sign, but when you look closely the upper part of the eight is bit blurred which may cause problems to detection algorithm.
+2. Looks clear, shouldn't be problem
+3. Some reflections on sign, may pose a problem
+4. Clear sign, shouldn't be problem
+5. Clear sign, shouldn't be problem
+
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -197,16 +213,16 @@ The code for making predictions on my final model is located in the tenth cell o
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Index | Truth | Prediction | Description (Predicted)  |
+|:-----:|:-----:|:----------:|:------------------------:|
+|    0  |    5  |         5  | Speed limit (80km/h)     |
+|    1  |    1  |         1  | Speed limit (30km/h)     |
+|    2  |   28  |        28  | Children crossing        |
+|    3  |   33  |        33  | Turn right ahead         |
+|    4  |   17  |        17  | No entry                 |
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly preduct 5/5 traffic signs. To be honest depending of the training epochs usually the first sign (80km/h limit" were incorrectly classified as "60km/h sign" or "100km/h sign"
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
@@ -214,13 +230,14 @@ The code for making predictions on my final model is located in the 11th cell of
 
 For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+![alt text][image9]
 
+### Visualize the Neural Network's State with Test Images
 
-For the second image ... 
+I visualized some convolutions, activations and pooling tensors and below are some of the examples i was able to visualize.
+
+![alt text][image10]
+![alt text][image11]
+![alt text][image12]
+![alt text][image13]
+![alt text][image14]
