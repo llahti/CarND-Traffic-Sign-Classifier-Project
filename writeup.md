@@ -35,6 +35,7 @@ The goals / steps of this project are the following:
 
 [image17]: ./illustrations/training_e120_lr0_0005_d0_85.png "Final model: Accuracies and hyperparameters"
 
+[image18]: ./illustrations/model_training_failed.png "Failed model training, accuracy drops to zero"
 
 # Rubric Points
 
@@ -58,7 +59,7 @@ Submission contains all the files required by rubic.
 
 Code for this step is in first code cell of the IPython notebook.
 
-Data was stored in a python pickle file and it contained training, validation and test set.
+Data was stored in a python pickle file.  Data includes **training, validation and test set**.
 
 
 ### 2. The basic summary of the data set.
@@ -84,7 +85,7 @@ Here is the sample of images in training set
 ![alt text][image2]
 
 
-Here is an exploratory visualization of the data set. It is a histogram showing quantity of traffic sgns in each category.
+Here is an exploratory visualization of the data set. It is a histogram showing quantity of traffic signs in each category.
 
 ![alt text][image1]
 
@@ -192,9 +193,12 @@ Final model was trained by using:
 
 Code for final model evaluation which calculates accuracy for training, validation and test data sets is located in twelth code cell of the IPython notebook.
 
-The function for calculating accuracy is the original one from LeNet-exercice and it is used in 2 key places. One place to use it is in training loop to evaluate training and validation accuracy. Note that i don't evaluate test date set in training loop because test set should be used sparingly.
+The function for calculating accuracy is the original one from LeNet-exercice and it is used in 2 key places. First place is  in training loop and the second one is final model evaluation. During the training I log training and evaluation accuracies which are plotted after the training. It is useful to plot accuracies in order to see if there is something strange going on during training.
 
-The other place is the final evaluation of model where training, validation and test sets are all evaluated
+For example i had this kind of problem during the model development and from the plot it was easy to see what happen. Ok. Finding the root cause was another problem.
+![alt text][image18]
+
+Final evaluation was done in separate code cell (#12). Reason for this is that test data should be used sparingly in order to avoid leaking information from test set.
 
 My final model results were:
 * Training Accuracy   = 0.999
@@ -213,6 +217,8 @@ Then next step was to make model deeper and wider. I added more convolutional la
 Then i implemented dropout on fully connected layers to preven over fitting.
 
 After this i begin to experiment with data preprocessing where i implemented image grayscaling and normalization where image mean is adjusted to zero and range is limited to -1...1. This image preprocessing was one of the key steps to make model training faster. 
+
+Last modification wasto replace ReLU units with ELUs as those are working well without batch normalization. Also ELUs train faster.
 
 If i would change something i would do data preprocessing as a first step as it is one of the most important things to make model successful. Then bit more thought need to be put to neural net structure. Perhaps multi-stage structure would be reasonable. One other possibility is to use already made models such as Inception-V3 or similar.
 
