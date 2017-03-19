@@ -56,12 +56,14 @@ Submission contains all the files required by rubic.
 
 ### 1. Loading data
 
+Code for this step is in first code cell of the IPython notebook.
+
 Data was stored in a python pickle file and it contained training, validation and test set.
 
 
 ### 2. The basic summary of the data set.
 
-The code for this step is contained in the [second code cell of the IPython notebook](https://render.githubusercontent.com/view/ipynb?commit=8fe96500cc4d031eeb8886cd79266391ea07e6fe&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c6c616874692f4361724e442d547261666669632d5369676e2d436c61737369666965722d50726f6a6563742f386665393635303063633464303331656562383838366364373932363633393165613037653666652f547261666669635f5369676e5f436c61737369666965722e6970796e62&nwo=llahti%2FCarND-Traffic-Sign-Classifier-Project&path=Traffic_Sign_Classifier.ipynb&repository_id=84849543#Provide-a-Basic-Summary-of-the-Data-Set-Using-Python,-Numpy-and/or-Pandas).
+Code for this step is in second code cell of the IPython notebook.
 
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
@@ -75,7 +77,7 @@ signs data set:
 
 ### 3. Exploratory visualization of the dataset
 
-The code for showing few sample images is in [third code cell of the IPython notebook](https://render.githubusercontent.com/view/ipynb?commit=8fe96500cc4d031eeb8886cd79266391ea07e6fe&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c6c616874692f4361724e442d547261666669632d5369676e2d436c61737369666965722d50726f6a6563742f386665393635303063633464303331656562383838366364373932363633393165613037653666652f547261666669635f5369676e5f436c61737369666965722e6970796e62&nwo=llahti%2FCarND-Traffic-Sign-Classifier-Project&path=Traffic_Sign_Classifier.ipynb&repository_id=84849543#Include-an-exploratory-visualization-of-the-dataset).
+Code for this step is in third and fourth code cells of the IPython notebook.
 
 Here is the sample of images in training set
 
@@ -86,9 +88,8 @@ Here is an exploratory visualization of the data set. It is a histogram showing 
 
 ![alt text][image1]
 
+
 ## 3. Design and Test a Model Architecture
-
-
 
 ### 1. Preprocessing
 
@@ -103,6 +104,8 @@ Data should be optimized before it is fed to the neural network in order to:
 * Generally make date more suitable for neural net
 
 #### Preprocessing pipeline
+
+Code for preprocessing pipeline is located in fifth code cell of the IPython notebook and preprocessing is run in the sixth code cell.
 
 In my code there are following steps in pre-processing pipeline
 
@@ -122,6 +125,8 @@ Preprocessed images are shown below. Traffic signs are same than image above in 
 
 ### 2. Model Architecture
 
+Code for model architecture is located in eight code cell of the IPython notebook.
+
 Model consist of single-stage deep neural network where are 6 convolutional layers and 3 fully connected layers. This model is based on the model in LeNet exercice and i have made model more deep and wide for better accuracy. Model structure is explained in below image.
 
 I decide to use ELUs as an activation function as those are working better on deep neural nets (https://arxiv.org/abs/1511.07289)
@@ -133,6 +138,9 @@ My final model is constructed as shown in image and it can be found from the IPy
 
 
 ### 3. Model Training
+
+Code for model training is located eleventh code cell of the IPython notebook.
+Accuracy evaluation function is located in tenth code cell of the IPython notebook.
 
 I have been experimenting model training with and without augmented dataset and varying hyperparameters such as number of epochs, learning rate and batch size.
 
@@ -161,6 +169,8 @@ Final number of images in sets after data augmentation is:
 
 #### 2. Data augmentation
 
+Code for data augmentatation is located in seventh code cell of the IPython notebook.
+
 I decide to augment data by rotating and shifting. Other techiques such as tilting, stretching, adjusting brightness and adjusting contrast i left out from my project. Data augmentation is good way to get more training data cheaply also it helps to train model better, makes it more robust and prevent overfitting.
 
 Example of image rotation
@@ -179,6 +189,8 @@ Final model was trained by using:
 
 
 #### 4. Model evaluation
+
+Code for final model evaluation which calculates accuracy for training, validation and test data sets is located in twelth code cell of the IPython notebook.
 
 The function for calculating accuracy is the original one from LeNet-exercice and it is used in 2 key places. One place to use it is in training loop to evaluate training and validation accuracy. Note that i don't evaluate test date set in training loop because test set should be used sparingly.
 
@@ -209,6 +221,8 @@ If i would change something i would do data preprocessing as a first step as it 
 
 ### 1. Choosing images
 
+In my Ipython notebook I load 5 test images from disk in fourteenth code cell,
+
 I tested my model with 5 german traffic signs downloaded from web. Here is picture of those
 
 ![alt text][image7]
@@ -228,6 +242,8 @@ Few comments about these german traffic signs Comments are per image index
 
 ### 2. Results
 
+Prediction code is run in fifteenth code cell of the IPython notebook.
+
 The code for making predictions on my final model is located in the tenth cell of the Ipython notebook.
 
 Here are the results of the prediction:
@@ -245,6 +261,8 @@ First traffic sign on this test set was incorrecly classified depending of train
 
 ### 3. Performance on New Images
 
+Performance is analyzed in sixteenth code cell of the IPython notebook.
+
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
 Model predicted 5 signs correctly out of 5. Prediction accuracy is 100.0% for 5 test images downloaded from web.
@@ -252,12 +270,17 @@ Model predicted 5 signs correctly out of 5. Prediction accuracy is 100.0% for 5 
 
 ### 4. Model Certainty
 
+Certainty (Topk-5) analysis is in 18th code cell and results are plotted in 19th code cell.
+Functions needed for plotting are defined in 17th code cell.
+
 Model is very confident of it's predictions. Only the first image (80km/h limit) has visible predictions on other classes. There it is predicted in 94% probability that it is indeed **80km/h sign** second best propability is ~6% for **60km/h limit**.
 
 ![alt text][image9]
 
 
 ### Visualize the Neural Network's State with Test Images
+
+Visualization code is located in 20th and 21st code cells of the IPython notebook
 
 I visualized some convolutions, activations and pooling tensors and below are some of the examples i was able to visualize.
 
